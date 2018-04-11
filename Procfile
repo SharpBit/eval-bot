@@ -1,1 +1,1 @@
-worker: python eval.py
+worker: python src/eval.py
