@@ -29,11 +29,12 @@ async def on_message(message):
     if message.guild is not None or message.author.id == bot.owner_id:
         await bot.process_commands(message)
 
-@commands.check(lambda ctx: bot.allowed or ctx.author.id in bot.allowed)
+@commands.check(lambda ctx: ctx.author.id in bot.allowed)
 @bot.command(name='eval')
 async def _eval(ctx, *, body):
     """Evaluates python code"""
-    blocked_words = ['.delete()', 'os', 'subprocess', 'history()']
+    blocked_words = ['.delete()', 'os', 'subprocess', 'history()', '("token")', "('token')",
+                     'aW1wb3J0IG9zCnJldHVybiBvcy5lbnZpcm9uLmdldCgndG9rZW4nKQ==', 'aW1wb3J0IG9zCnByaW50KG9zLmVudmlyb24uZ2V0KCd0b2tlbicpKQ==']
     if ctx.author.id != bot.owner_id:
         for x in blocked_words:
             if x in body:
