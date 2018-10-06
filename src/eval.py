@@ -11,7 +11,7 @@ from contextlib import redirect_stdout
 import base64
 import json
 
-bot = commands.Bot(command_prefix=commands.when_mentioned_or('_'))
+bot = commands.Bot(command_prefix=commands.when_mentioned_or('='))
 bot.remove_command('help')
 
 @bot.event
@@ -33,12 +33,6 @@ async def on_message(message):
 @bot.command(name='eval')
 async def _eval(ctx, *, body):
     """Evaluates python code"""
-    blocked_words = ['.delete()', 'os', 'subprocess', 'history()', '("token")', "('token')",
-                     'aW1wb3J0IG9zCnJldHVybiBvcy5lbnZpcm9uLmdldCgndG9rZW4nKQ==', 'aW1wb3J0IG9zCnByaW50KG9zLmVudmlyb24uZ2V0KCd0b2tlbicpKQ==']
-    if ctx.author.id != bot.owner_id:
-        for x in blocked_words:
-            if x in body:
-                return await ctx.send('Your code contains certain blocked words.')
     env = {
         'ctx': ctx,
         'channel': ctx.channel,
