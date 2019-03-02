@@ -13,6 +13,6 @@ pyyaml
 pynite
 Pillow
 lavalink
-brawlstars
+brawlstats
 aioconsole
 cachetools
